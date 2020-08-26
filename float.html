@@ -1,4 +1,31 @@
-<div style="border: 1px solid #000;">
+
+<meta charset="utf-8">
+<div style="border: 1px solid #000;overflow: auto">
     <div style="width: 100px;height: 100px;background: #eee;float: left;"></div>
-    <div style="clear: left"></div>
+    <div style="display: inline-block">hello</div>
+</div>
+<div style="position: relative;border: 1px solid green;">
+    <div style="width: 100px;height: 100px;background: red;margin: 0 auto;"></div>
+</div>
+<h3> 父元素 display:flex;justify-content: center;align-items: center</h3>
+<div style="position: relative;border: 1px solid green;height: 400px;display: flex;justify-content: center;align-items: center">
+    <div style="width: 100px; height: 100px;background: red;"></div>
+</div>
+<h3> 父元素 display:flex 子元素 margin:auto</h3>
+<div style="position: relative;border: 1px solid green;height: 400px;display: flex">
+    <div style="width: 100px; height: 100px;background: red;margin: auto;"></div>
+</div>
+<h3> 父元素 display:grid 子元素 margin:auto</h3>
+<div style="position: relative;border: 1px solid green;height: 400px;display: grid">
+    <div style="width: 100px; height: 100px;background: red;margin: auto;"></div>
+</div>
+
+<h3> 父元素 position:relative 子元素 绝对定位 +top: 50%;left: 50%; +transform: translate(-50%,-50%) 或 margin-left: -50px; margin-top: -50px;</h3>
+<div style="position: relative;border: 1px solid green;height: 400px;">
+    <!--    <div style="width: 100px; height: 100px;background: red;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%)"></div>-->
+    <div style="width: 100px; height: 100px;background: red;position: absolute;top: 50%;left: 50%;margin-left: -50px; margin-top: -50px;"></div>
+</div>
+<h3>父元素 display:table-cell;vertical-align: middle;text-align: center，子元素 display: inline-block;</h3>
+<div style="position: relative;border: 1px solid green;height: 400px;width: 400px; display: table-cell;vertical-align: middle;text-align: center">
+    <div style="width: 100px; height: 100px;background: red;display: inline-block;"></div>
 </div>

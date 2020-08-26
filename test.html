@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="height: 700px;width: 100%;position: relative;background-color: red">
+    <div id="target" style="height: 200px;width:200px;position: absolute;top: 50%;left: 50%;background-color: green;margin-top: -100px;margin-left: -100px">
+
+    </div>
+</div>
+<button id="btn">click</button>
+</body>
+<style>
+    .transform{
+        animation: move 0.1s;
+    }
+    @keyframes move {
+        from{
+        }
+        to{
+            margin-left: 0
+        }
+
+    }
+</style>
+<script>
+    var btn=document.getElementById("btn")
+    var target=document.getElementById("target")
+    btn.addEventListener('click',function () {
+        target.setAttribute("class","transform")
+    })
+</script>
+</html>
