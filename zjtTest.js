@@ -137,4 +137,107 @@ instance3_2.sayName(); // "Greg";
 instance3_2.sayAge(); // 27
 
 
+/**
+ * 4、原型式继承 (利用一个空对象作为中介，将某个对象直接赋值给空对象构造函数的原型)
+ * @constructor
+ * 缺点：原型链继承多个实例的引用类型属性指向相同，存在篡改的可能
+ *      无法传递参数
+ */
+console.log('-------- 4、原型式继承 -------');
+function object4(obj) {
+    function F() {}
+    F.prototype = obj;
+    return new F()
+}
+var person4 = {
+    name: "Nicholas",
+    friends: ["Shelby", "Court", "Van"]
+};
 
+var anotherPerson4 = object4(person4);
+anotherPerson4.name = "Greg";
+anotherPerson4.friends.push("Rob");
+
+var yetAnotherPerson4 = object4(person4);
+yetAnotherPerson4.name = "Linda";
+yetAnotherPerson4.friends.push("Barbie");
+
+console.log(person4.name); // Nicholas
+console.log(person4.friends); // [ 'Shelby', 'Court', 'Van', 'Rob', 'Barbie' ]
+
+
+/**
+ * 5、寄生式继承 (在原型式继承的基础上，增强对象，返回构造函数)
+ * @constructor
+ * 缺点：原型链继承多个实例的引用类型属性指向相同，存在篡改的可能
+ *      无法传递参数
+ */
+console.log('-------- 5、寄生式继承 -------');
+function createAnother5(original){
+    var clone = object4(original); // 通过调用 object() 函数创建一个新对象
+    clone.sayHi = function(){  // 以某种方式来增强对象
+        console.log("hi");
+    };
+    return clone; // 返回这个对象
+}
+var person5 = {
+    name: "Nicholas",
+    friends: ["Shelby", "Court", "Van"]
+};
+var anotherPerson5 = createAnother5(person5);
+anotherPerson5.sayHi(); //"hi"
+
+
+/**
+ * 6、寄生组合继承 (结合借用构造函数传递参数和寄生模式实现继承) ****常用****
+ * @constructor
+ */
+console.log('-------- 6、寄生组合继承 -------');
+function inheritPrototype6(subType, superType){
+    var prototype = Object.create(superType.prototype); // 创建对象，创建父类原型的一个副本
+    prototype.constructor = subType;                    // 增强对象，弥补因重写原型而失去的默认的constructor 属性
+    subType.prototype = prototype;                      // 指定对象，将新创建的对象赋值给子类的原型
+}
+// 父类初始化实例属性和原型属性
+function SuperType6(name){
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+}
+SuperType6.prototype.sayName = function(){
+    console.log('name:', this.name);
+};
+
+// 借用构造函数传递增强子类实例属性（支持传参和避免篡改）
+function SubType6(name, age){
+    SuperType6.call(this, name);
+    this.age = age;
+}
+
+// 将父类原型指向子类
+inheritPrototype6(SubType6, SuperType6);
+
+// 新增子类原型属性
+SubType6.prototype.sayAge = function(){
+    console.log('age:', this.age);
+};
+
+var instance6_1 = new SubType6("xyc", 23);
+var instance6_2 = new SubType6("lxy", 24);
+
+instance6_1.colors.push("2"); // ["red", "blue", "green", "2"]
+instance6_2.colors.push("3"); // ["red", "blue", "green", "3"]
+
+instance6_1.sayAge();
+instance6_2.sayAge();
+console.log(instance6_1.colors);
+console.log(instance6_2.colors);
+
+
+
+/**
+ * 7、混入方式继承多个对象
+ * @constructor
+ * 缺点：原型链继承多个实例的引用类型属性指向相同，存在篡改的可能
+ *      无法传递参数
+ */
+console.log('-------- 6、寄生组合继承 -------');
